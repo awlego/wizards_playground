@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3o2lmhu8mqqv"]
+
+[ext_resource type="Texture2D" uid="uid://fx5wwrcj0ebm" path="res://assets/images/00085-2029840879.png" id="1_binep"]
+[ext_resource type="Script" path="res://src/Player.gd" id="2_q0gdp"]
+[ext_resource type="Texture2D" uid="uid://g7co6olrokvm" path="res://assets/images/00032-3728323327.png" id="3_car56"]
+[ext_resource type="Script" path="res://src/Enemy.gd" id="3_oclvo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbqs6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5qmd"]
+
+[node name="Game" type="Node"]
+
+[node name="Player" type="Area2D" parent="."]
+script = ExtResource("2_q0gdp")
+
+[node name="sprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_binep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_bbqs6")
+
+[node name="Enemy" type="Area2D" parent="."]
+script = ExtResource("3_oclvo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_t5qmd")
+
+[node name="sprite" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("3_car56")
