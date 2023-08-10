@@ -2,12 +2,27 @@ extends Node2D
 
 # Movement speed in pixels per second
 var speed = 600
+var max_health = 10
+var current_health = 10 
+
+@onready var health_bar = get_node("../CanvasLayer/ProgressBar")
+var Fireball = preload("res://src/fireball.tscn")
+
 
 func _ready():
+	print(typeof(Fireball))
+	
+	health_bar.max_value = max_health
+	health_bar.value = current_health
 
-	self.connect("area_entered", Callable(self, "_on_Player_area_entered"))
 	position.x = 1000
 	position.y = 1000
+	
+	self.connect("area_entered", Callable(self, "_on_Player_area_entered"))
+
+func _input(event):
+	if event.is_action_pressed("Cast Spell"):
+		cast_spell()
 
 func _process(delta):
 	var velocity = Vector2()
@@ -30,13 +45,23 @@ func _process(delta):
 	position += velocity * delta
 
 func _on_Player_area_entered(area):
-	print("Touched!")
-	print(area.name)
 	if area.name == "Enemy":
-		print("Game Over!")
+		take_damage(1)
+		if current_health == 0:
+			print("Game Over!")
 		# Here you can restart the game, end it, or perform any other action.
 
-func _draw():
-	if $CollisionShape2D.shape:  # Check if a shape is set
-		var rect = $CollisionShape2D.shape.extents * 2  # Assuming it's a RectangleShape2D
-		draw_rect(Rect2(-rect.x/2, -rect.y/2, rect.x, rect.y), Color(0, 1, 0, 1.0))  # Draw in green with 50% opacity
+func take_damage(amount):
+	current_health -= amount
+	if current_health < 0:
+		current_health = 0
+	update_health_bar()
+
+func update_health_bar():
+	health_bar.value = current_health
+	
+func cast_spell():
+	var fireball = Fireball.instantiate()
+	fireball.position = self.position
+	self.get_parent().add_child(fireball)
+

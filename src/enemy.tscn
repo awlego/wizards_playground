@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dviv518gr4ju4"]
+
+[ext_resource type="Script" path="res://src/Enemy.gd" id="1_hxsuf"]
+[ext_resource type="Texture2D" uid="uid://c1i0k8hnbty24" path="res://assets/images/[removal.ai]_661c5d68-a3cf-49cf-83da-005f3a9b618a-00414-2623115923.png" id="2_wy4tx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_guo5r"]
+radius = 121.0
+height = 284.0
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_hxsuf")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_wy4tx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -10)
+shape = SubResource("CapsuleShape2D_guo5r")
+debug_color = Color(0.85098, 0, 0, 0.545098)

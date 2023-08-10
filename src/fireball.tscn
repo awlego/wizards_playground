@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://npp0sggwwrs4"]
+
+[ext_resource type="Texture2D" uid="uid://brdlm5dl52fa3" path="res://assets/images/fireball_1.png" id="1_85mkb"]
+[ext_resource type="Script" path="res://src/fireball.gd" id="1_uwg8f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqqxp"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hxwj"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tllxj"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v87vm"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4nr1"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16w2g"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61y18"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wnu5"]
+atlas = ExtResource("1_85mkb")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hhbe2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqqxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hxwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tllxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v87vm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4nr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16w2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61y18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wnu5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4l742"]
+radius = 14.3178
+
+[node name="Fireball" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_uwg8f")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hhbe2")
+frame_progress = 0.002815
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-14, -1)
+shape = SubResource("CircleShape2D_4l742")

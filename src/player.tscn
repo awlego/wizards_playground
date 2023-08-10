@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dum0aysvuc0do"]
+
+[ext_resource type="Script" path="res://src/Player.gd" id="1_wa1pe"]
+[ext_resource type="Texture2D" uid="uid://b85opy2daoudf" path="res://assets/images/[removal.ai]_71fdd7db-a13a-49b3-b9d0-fbdd63e1fc2e-00401-233913067.png" id="2_bhx27"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fvbua"]
+radius = 142.0
+height = 356.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_wa1pe")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_bhx27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-24, 49)
+shape = SubResource("CapsuleShape2D_fvbua")
+debug_color = Color(0.972549, 0, 0, 0.470588)

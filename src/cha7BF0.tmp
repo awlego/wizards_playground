@@ -1,0 +1,127 @@
+[gd_scene load_steps=20 format=3 uid="uid://d3o2lmhu8mqqv"]
+
+[ext_resource type="Script" path="res://src/Game.gd" id="1_xw550"]
+[ext_resource type="Script" path="res://src/Player.gd" id="2_q0gdp"]
+[ext_resource type="Texture2D" uid="uid://b85opy2daoudf" path="res://assets/images/[removal.ai]_71fdd7db-a13a-49b3-b9d0-fbdd63e1fc2e-00401-233913067.png" id="2_xffx1"]
+[ext_resource type="Script" path="res://src/Enemy.gd" id="3_oclvo"]
+[ext_resource type="Texture2D" uid="uid://c1i0k8hnbty24" path="res://assets/images/[removal.ai]_661c5d68-a3cf-49cf-83da-005f3a9b618a-00414-2623115923.png" id="4_2tbkr"]
+[ext_resource type="Script" path="res://src/HealthBar.gd" id="5_jub1s"]
+[ext_resource type="Texture2D" uid="uid://brdlm5dl52fa3" path="res://assets/images/fireball_1.png" id="6_gcvdy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fvbua"]
+radius = 142.0
+height = 356.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_guo5r"]
+radius = 121.0
+height = 284.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqqxp"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hxwj"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tllxj"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v87vm"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4nr1"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16w2g"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61y18"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wnu5"]
+atlas = ExtResource("6_gcvdy")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hhbe2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqqxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hxwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tllxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v87vm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4nr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16w2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61y18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wnu5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4l742"]
+radius = 14.3178
+
+[node name="Game" type="Node"]
+script = ExtResource("1_xw550")
+
+[node name="Player" type="Area2D" parent="."]
+script = ExtResource("2_q0gdp")
+
+[node name="sprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_xffx1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-24, 49)
+shape = SubResource("CapsuleShape2D_fvbua")
+debug_color = Color(0.972549, 0, 0, 0.470588)
+
+[node name="Enemy" type="Area2D" parent="."]
+script = ExtResource("3_oclvo")
+
+[node name="sprite" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("4_2tbkr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(-6, -10)
+shape = SubResource("CapsuleShape2D_guo5r")
+debug_color = Color(0.85098, 0, 0, 0.545098)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 50.0
+offset_right = 1050.0
+offset_bottom = 100.0
+script = ExtResource("5_jub1s")
+metadata/_edit_use_anchors_ = true
+
+[node name="Fireball" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Fireball"]
+sprite_frames = SubResource("SpriteFrames_hhbe2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball"]
+position = Vector2(-14, -1)
+shape = SubResource("CircleShape2D_4l742")
