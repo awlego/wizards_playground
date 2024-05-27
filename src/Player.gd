@@ -8,6 +8,7 @@ var current_health = 10
 @onready var health_bar = get_node("../CanvasLayer/ProgressBar")
 var Fireball = preload("res://src/fireball.tscn")
 
+@onready var bolt_scene = load("res://src/Bolt.tscn")
 
 func _ready():
 	print(typeof(Fireball))
@@ -22,7 +23,9 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("Cast Spell"):
-		cast_spell()
+		shoot_blue_bolt()
+	if event.is_action_pressed("Cast Secondary Spell"):
+		shoot_purple_bolt()
 
 func _process(delta):
 	var velocity = Vector2()
@@ -65,3 +68,21 @@ func cast_spell():
 	fireball.position = self.position
 	self.get_parent().add_child(fireball)
 
+func shoot_bolt(texture_path: String) -> void:
+	var bolt = bolt_scene.instantiate()
+	bolt.direction = Vector2.RIGHT # Set the direction of the bolt
+	bolt.position = global_position + (Vector2.ZERO)# Set the starting position
+	print(global_position, bolt.position)
+	bolt.texture_path = texture_path # Set the texture of the bolt
+	bolt.connect("hit", Callable(self, "_on_bolt_hit"))
+	add_child(bolt)
+
+func _on_bolt_hit(target: Node) -> void:
+	# Handle what happens when the bolt hits something
+	print("Bolt hit ", target.name)
+
+func shoot_purple_bolt() -> void:
+	shoot_bolt("res://assets/images/purple_bolt.png")
+
+func shoot_blue_bolt() -> void:
+	shoot_bolt("res://assets/images/blue_bolt.png")
