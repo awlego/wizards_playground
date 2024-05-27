@@ -1,7 +1,7 @@
 extends Node
 
 var enemies = []
-var PlayerScript = preload("res://src/character.tscn")
+var PlayerScript = preload("res://src/player.tscn")
 var EnemyScript = preload("res://src/enemy.tscn")
 
 func _ready():

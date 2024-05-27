@@ -2,11 +2,12 @@ extends Area2D
 
 @export var speed: float = 400.0
 @export var direction: Vector2 = Vector2.ZERO
-@export var texture_path: String
+@export var texture_path: String = "res://assets/images/unknown_texture.png"
 
 signal hit(target: Node)
 
 func _ready() -> void:
+	print(texture_path)
 	$Sprite.texture = load(texture_path)
 	# Center the sprite's offset
 	var sprite_size = $Sprite.texture.get_size()
