@@ -1,10 +1,12 @@
 extends Node
 
 var enemies = []
+var PlayerScript = preload("res://src/character.tscn")
+var EnemyScript = preload("res://src/enemy.tscn")
 
 func _ready():
 	create_player()
-	enemies.append(create_enemy())
+	create_enemy()
 
 func _process(delta):
 	if len(enemies) == 0:
@@ -15,7 +17,10 @@ func _input(event):
 		create_enemy()
 		
 func create_player():
-	self.add_child($Player)
+	var player = PlayerScript.instantiate()
+	self.add_child(player)
 
 func create_enemy():
-	self.add_child($Enemy)
+	var new_enemy = EnemyScript.instantiate()
+	self.add_child(new_enemy)
+	enemies.append(new_enemy)

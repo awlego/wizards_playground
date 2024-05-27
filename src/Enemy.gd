@@ -26,7 +26,7 @@ func _process(delta):
 	pass
 	
 func _on_entity_area_entered(area):
-	print(area, "entered the enemy hit box")
+	print(area.name, " entered the enemy hit box")
 	if area.name == "Fireball":
 		take_damage(area.damage)
 	
@@ -35,7 +35,7 @@ func take_damage(amount):
 	current_health -= amount
 	if current_health < 0:
 		current_health = 0
-	print(current_health)
+	print("Enemy health after taking damage: ", current_health)
 	if current_health == 0:
 		queue_free() # mark this enemy for deletion
 
