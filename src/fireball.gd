@@ -11,7 +11,7 @@ func _ready():
 			enemy = child
 	$Sprite2D.play("default")
 	self.connect("area_entered", Callable(self, "_on_entity_area_entered"))
-	_debug_draw_targeting_line()
+	#_debug_draw_targeting_line()
 	
 func _process(delta):
 	var direction

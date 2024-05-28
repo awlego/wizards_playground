@@ -1,16 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdkmrbxpejdaa"]
+[gd_scene load_steps=3 format=3 uid="uid://cdkmrbxpejdaa"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_xw550"]
-[ext_resource type="PackedScene" uid="uid://dum0aysvuc0do" path="res://src/player.tscn" id="2_rcpqg"]
-[ext_resource type="PackedScene" uid="uid://dviv518gr4ju4" path="res://src/enemy.tscn" id="3_tslg8"]
 [ext_resource type="Script" path="res://src/HealthBar.gd" id="5_jub1s"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_xw550")
-
-[node name="Player" parent="." instance=ExtResource("2_rcpqg")]
-
-[node name="Enemy" parent="." instance=ExtResource("3_tslg8")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

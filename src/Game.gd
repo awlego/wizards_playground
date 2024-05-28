@@ -9,8 +9,7 @@ func _ready():
 	create_enemy()
 
 func _process(_delta):
-	if len(enemies) == 0:
-		create_enemy()
+	pass
 
 func _input(event):
 	if event.is_action_pressed("_debug Spawn Enemy"):

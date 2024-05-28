@@ -5,11 +5,10 @@ var speed = 600
 var max_health = 10
 var current_health = 10
 var faction = 1 
+var total_bolts_fired = 0
 
 @onready var health_bar = get_node("../CanvasLayer/ProgressBar")
-var Fireball = preload("res://src/fireball.tscn")
-
-@onready var bolt_scene = load("res://src/Bolt.tscn")
+@onready var bolt_scene = preload("res://src/Bolt.tscn")
 
 func _ready():
 	health_bar.max_value = max_health
@@ -21,7 +20,6 @@ func _ready():
 	collision_layer = 1 << 1  # Layer 2 (Player)
 	collision_mask = 1 << 2 | 1 << 4 # Collides with Layer 5 (Friendly Fire Projectile),  # Collides with Layer 3 (Enemies)
 	
-	#self.connect("area_entered", Callable(self, "_on_Player_area_entered"))
 
 func _input(event):
 	if event.is_action_pressed("Cast Spell"):
@@ -45,15 +43,9 @@ func _process(delta):
 	# Normalize velocity so diagonal movement isn't faster
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-
 	# Move the sprite
 	position += velocity * delta
 
-#func _on_Player_area_entered(area):
-	#if area.name == "Enemy":
-		#take_damage(1)
-
-		 #Here you can restart the game, end it, or perform any other action.
 
 func take_damage(amount):
 	current_health -= amount
@@ -66,11 +58,6 @@ func take_damage(amount):
 func update_health_bar():
 	health_bar.value = current_health
 	
-func cast_spell():
-	var fireball = Fireball.instantiate()
-	fireball.position = self.position
-	self.get_parent().add_child(fireball)
-
 func shoot_bolt(frames_path: String) -> void:
 	if frames_path == "":
 		print("Error: No frames path provided for bolt.")
@@ -87,10 +74,13 @@ func shoot_bolt(frames_path: String) -> void:
 
 	bolt.connect("hit", Callable(self, "_on_bolt_hit"))
 	self.get_parent().add_child(bolt)
+	total_bolts_fired += 1
+	print("total_bolts_fired: ", total_bolts_fired)
 
 func _on_bolt_hit(target: Node) -> void:
 	# Handle what happens when the bolt hits something
 	print("Bolt hit ", target.name)
+	#target.take_damage(7)
 
 func shoot_purple_bolt() -> void:
 	shoot_bolt("res://assets/frames/purple_bolt_frames.tres")
