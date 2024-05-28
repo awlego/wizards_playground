@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx1pb1ur78yeb"]
+
+[ext_resource type="Script" path="res://src/Bolt.gd" id="1_jwm4o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0o6c"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_jwm4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e0o6c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

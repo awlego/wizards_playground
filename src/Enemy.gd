@@ -10,12 +10,9 @@ func _ready():
 	current_health = 20
 	var parent_node = get_parent()
 	for child in parent_node.get_children():
-		print(child.name)
 		if child.name == "Player":
 			player = child
 
-	print(player)
-	print(player.global_position)
 	self.connect("area_entered", Callable(self, "_on_area_entered"))
 	position.x = 300
 	position.y = 300

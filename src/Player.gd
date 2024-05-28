@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 # Movement speed in pixels per second
 var speed = 600
@@ -17,6 +17,9 @@ func _ready():
 
 	position.x = 1000
 	position.y = 1000
+	
+	collision_layer = 1 << 1  # Layer 2 (Player)
+	collision_mask = 1 << 2 | 1 << 4 # Collides with Layer 5 (Friendly Fire Projectile),  # Collides with Layer 3 (Enemies)
 	
 	#self.connect("area_entered", Callable(self, "_on_Player_area_entered"))
 

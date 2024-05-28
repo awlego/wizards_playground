@@ -8,6 +8,8 @@ radius = 121.0
 height = 284.0
 
 [node name="Enemy" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_hxsuf")
 
 [node name="sprite" type="Sprite2D" parent="."]

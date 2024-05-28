@@ -32,6 +32,8 @@ func _ready() -> void:
 	
 	collision_layer = 1 << 3  # Layer 4 (Projectiles)
 	collision_mask = 1 << 2   # Collides with Layer 3 (Enemies)
+	
+	print("collision_layer: ", collision_layer, ", collision_mask: ", collision_mask)
 
 func _process(delta: float) -> void:
 	position += direction * speed * delta
