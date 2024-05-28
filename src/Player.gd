@@ -3,7 +3,8 @@ extends Node2D
 # Movement speed in pixels per second
 var speed = 600
 var max_health = 10
-var current_health = 10 
+var current_health = 10
+var faction = 1 
 
 @onready var health_bar = get_node("../CanvasLayer/ProgressBar")
 var Fireball = preload("res://src/fireball.tscn")
@@ -11,15 +12,13 @@ var Fireball = preload("res://src/fireball.tscn")
 @onready var bolt_scene = load("res://src/Bolt.tscn")
 
 func _ready():
-	print(typeof(Fireball))
-	
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 
 	position.x = 1000
 	position.y = 1000
 	
-	self.connect("area_entered", Callable(self, "_on_Player_area_entered"))
+	#self.connect("area_entered", Callable(self, "_on_Player_area_entered"))
 
 func _input(event):
 	if event.is_action_pressed("Cast Spell"):
@@ -47,18 +46,19 @@ func _process(delta):
 	# Move the sprite
 	position += velocity * delta
 
-func _on_Player_area_entered(area):
-	if area.name == "Enemy":
-		take_damage(1)
-		if current_health == 0:
-			print("Game Over!")
-		# Here you can restart the game, end it, or perform any other action.
+#func _on_Player_area_entered(area):
+	#if area.name == "Enemy":
+		#take_damage(1)
+
+		 #Here you can restart the game, end it, or perform any other action.
 
 func take_damage(amount):
 	current_health -= amount
 	if current_health < 0:
 		current_health = 0
 	update_health_bar()
+	if current_health == 0:
+		print("Game Over!")
 
 func update_health_bar():
 	health_bar.value = current_health
@@ -68,21 +68,30 @@ func cast_spell():
 	fireball.position = self.position
 	self.get_parent().add_child(fireball)
 
-func shoot_bolt(texture_path: String) -> void:
+func shoot_bolt(frames_path: String) -> void:
+	if frames_path == "":
+		print("Error: No frames path provided for bolt.")
+		return
+
 	var bolt = bolt_scene.instantiate()
-	bolt.direction = Vector2.RIGHT # Set the direction of the bolt
-	bolt.position = global_position + (Vector2.ZERO)# Set the starting position
-	print(global_position, bolt.position)
-	bolt.texture_path = texture_path # Set the texture of the bolt
+	var mouse_pos = get_global_mouse_position()
+	var direction = (mouse_pos - self.position).normalized()
+	
+	bolt.direction = direction
+	bolt.rotation = direction.angle()
+	bolt.frames_path = frames_path # Set the frames of the bolt
+	bolt.position = self.position # Set the starting position to the character's center
+
 	bolt.connect("hit", Callable(self, "_on_bolt_hit"))
-	add_child(bolt)
+	self.get_parent().add_child(bolt)
 
 func _on_bolt_hit(target: Node) -> void:
 	# Handle what happens when the bolt hits something
 	print("Bolt hit ", target.name)
 
 func shoot_purple_bolt() -> void:
-	shoot_bolt("res://assets/images/purple_bolt.png")
+	shoot_bolt("res://assets/frames/purple_bolt_frames.tres")
 
 func shoot_blue_bolt() -> void:
-	shoot_bolt("res://assets/images/blue_bolt.png")
+	shoot_bolt("res://assets/frames/blue_bolt_frames.tres")
+

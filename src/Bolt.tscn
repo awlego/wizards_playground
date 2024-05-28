@@ -1,13 +1,86 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx1pb1ur78yeb"]
+[gd_scene load_steps=13 format=3 uid="uid://dx1pb1ur78yeb"]
 
 [ext_resource type="Script" path="res://src/Bolt.gd" id="1_jwm4o"]
+[ext_resource type="Texture2D" uid="uid://brdlm5dl52fa3" path="res://assets/images/fireball_1.png" id="2_n3jta"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0o6c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ng7c"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(0, 0, 64, 64)
 
-[node name="Area2D" type="Area2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ndwr"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ruo7"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfrsx"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7l2ig"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uw3d"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sisp3"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js1ky"]
+atlas = ExtResource("2_n3jta")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p7hbc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ng7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ndwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ruo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfrsx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7l2ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1uw3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sisp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_js1ky")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vkhot"]
+radius = 7.0
+height = 28.0
+
+[node name="BoltArea2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_jwm4o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_e0o6c")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p7hbc")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-15, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vkhot")
+debug_color = Color(0.0823529, 0.627451, 0, 0.419608)

@@ -8,7 +8,7 @@ func _ready():
 	create_player()
 	create_enemy()
 
-func _process(delta):
+func _process(_delta):
 	if len(enemies) == 0:
 		create_enemy()
 
