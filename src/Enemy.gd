@@ -1,7 +1,7 @@
 extends Area2D
 
 var speed = 150  # Movement speed in pixels per second
-@onready var current_health: int = 110
+@onready var current_health: int = 11
 @onready var health_bar = $HealthBar
 
 #@export var health: int = 100

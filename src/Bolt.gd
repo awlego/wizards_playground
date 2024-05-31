@@ -28,8 +28,7 @@ func _ready() -> void:
 	self.area_entered.connect(_on_area_entered)
 	
 	collision_layer = 1 << 3  # Layer 4 (Projectiles)
-	collision_mask = 1 << 2   # Collides with Layer 3 (Enemies)
-	#print("collision_layer: ", collision_layer, ", collision_mask: ", collision_mask)
+	collision_mask = 1 << 2 | 1 << 5   # Collides with Enemies and projectiles
 
 func _process(delta: float) -> void:
 	position += direction * speed * delta
