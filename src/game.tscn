@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdkmrbxpejdaa"]
+[gd_scene load_steps=7 format=3 uid="uid://cdkmrbxpejdaa"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_xw550"]
+[ext_resource type="PackedScene" uid="uid://crqc85caec24x" path="res://src/wand_ui.tscn" id="3_hdnyy"]
 [ext_resource type="Script" path="res://src/HealthBar.gd" id="5_jub1s"]
 
 [sub_resource type="Gradient" id="Gradient_2aq2l"]
@@ -39,3 +40,9 @@ texture = SubResource("GradientTexture1D_wolg0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
 position = Vector2(128, -24)
 shape = SubResource("RectangleShape2D_aexxy")
+
+[node name="Wand_UI" parent="." instance=ExtResource("3_hdnyy")]
+offset_left = 1.0
+offset_top = 100.0
+offset_right = 1.0
+offset_bottom = 100.0

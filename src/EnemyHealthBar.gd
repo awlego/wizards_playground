@@ -9,7 +9,7 @@ func _ready():
 	self.size.y = 10
 	update_position()
 
-func _process(delta):
+func _process(_delta):
 	update_position()
 
 func update_position():
