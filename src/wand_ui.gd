@@ -27,7 +27,6 @@ func calc_snap_spot():
 	
 func update_would_snap():
 	var snap_spot = calc_snap_spot()
-	print(snap_spot)
 	
 func snap():
 	$SpellCard.global_position = calc_snap_spot()

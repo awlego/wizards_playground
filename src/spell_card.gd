@@ -12,6 +12,7 @@ func _ready():
 	if sprite.texture:
 		# Get the size of the sprite texture
 		var texture_size = sprite.texture.get_size()
+		texture_size /= 8
 
 		# Ensure the collision shape is a RectangleShape2D
 		if collision_shape.shape is RectangleShape2D:

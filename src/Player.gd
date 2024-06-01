@@ -13,7 +13,7 @@ var gravity = 8000
 @onready var left_timothy = preload("res://assets/images/pixel_turtle_clean.png")
 @onready var right_timothy = preload("res://assets/images/pixel_turtle_clean_right.png")
 @onready var health_bar = get_node("../CanvasLayer/ProgressBar")
-@onready var bolt_scene = preload("res://src/Bolt.tscn")
+
 @onready var momentum = 0
 #@onready var velocity: Vector2 = Vector2.ZERO
 @export var max_speed: float = 2000.0
@@ -21,6 +21,7 @@ var gravity = 8000
 
 
 func _ready():
+	#TODO this should set a health and then the external healthbar should connect to it.
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 
@@ -39,10 +40,10 @@ func _ready():
 
 	
 func _input(event):
-	if event.is_action_pressed("Cast Spell"):
-		shoot_blue_bolt()
+#	if event.is_action_pressed("Cast Spell"):
+#		shoot_blue_bolt()
 	if event.is_action_pressed("Cast Secondary Spell"):
-		shoot_purple_bolt()
+		$Wand.cast()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -97,33 +98,5 @@ func take_damage(amount):
 func update_health_bar():
 	health_bar.value = current_health
 	
-func shoot_bolt(frames_path: String) -> void:
-	if frames_path == "":
-		print("Error: No frames path provided for bolt.")
-		return
 
-	var bolt = bolt_scene.instantiate()
-	var mouse_pos = get_global_mouse_position()
-	var direction = (mouse_pos - self.position).normalized()
-	
-	bolt.direction = direction
-	bolt.rotation = direction.angle()
-	bolt.frames_path = frames_path # Set the frames of the bolt
-	bolt.position = self.position # Set the starting position to the character's center
-
-	bolt.connect("hit", Callable(self, "_on_bolt_hit"))
-	self.get_parent().add_child(bolt)
-	total_bolts_fired += 1
-	print("total_bolts_fired: ", total_bolts_fired)
-
-func _on_bolt_hit(target: Node) -> void:
-	# Handle what happens when the bolt hits something
-	print("Bolt hit ", target.name)
-	#target.take_damage(7)
-
-func shoot_purple_bolt() -> void:
-	shoot_bolt("res://assets/frames/purple_bolt_frames.tres")
-
-func shoot_blue_bolt() -> void:
-	shoot_bolt("res://assets/frames/blue_bolt_frames.tres")
 

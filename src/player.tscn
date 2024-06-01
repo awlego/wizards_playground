@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dum0aysvuc0do"]
+[gd_scene load_steps=7 format=3 uid="uid://dum0aysvuc0do"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_wa1pe"]
 [ext_resource type="Texture2D" uid="uid://byf2gg5jtwotl" path="res://assets/images/pixel_turtle_clean.png" id="2_ogwre"]
 [ext_resource type="Texture2D" uid="uid://b62bep4mwwp1v" path="res://assets/images/pixel_turtle_clean2.png" id="3_h5q4r"]
+[ext_resource type="PackedScene" uid="uid://bes7jx3kv0nsc" path="res://src/wand.tscn" id="4_loh0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0lnu"]
 size = Vector2(826.5, 1461)
@@ -35,3 +36,7 @@ debug_color = Color(0.0627451, 0.498039, 1, 0.470588)
 position = Vector2(32, -270)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4vq2s")
+
+[node name="Wand" parent="." instance=ExtResource("4_loh0d")]
+position = Vector2(-423, 331)
+rotation = -0.801106

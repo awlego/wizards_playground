@@ -35,13 +35,11 @@ func _on_area_entered(area: Node):
 		player.take_damage(1)
 	
 func take_damage(damage: int):
-	print("Enemy health BEFORE taking damage: ", current_health)
-	print("Enemy taking ", damage, " damage.")
+
 	current_health -= damage
 	if current_health < 0:
 		current_health = 0
-	print("Enemy health after taking damage: ", current_health)
-	print()
+
 	health_bar.value = current_health
 	if current_health == 0:
 		die()

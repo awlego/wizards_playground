@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cosklwvxkunn5"]
+[gd_scene load_steps=4 format=3 uid="uid://cosklwvxkunn5"]
 
 [ext_resource type="Script" path="res://src/purple_bolt.gd" id="1_wbmtm"]
+[ext_resource type="Script" path="res://src/Spell.gd" id="2_heon5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsuhy"]
 
@@ -11,3 +12,6 @@ script = ExtResource("1_wbmtm")
 shape = SubResource("CircleShape2D_lsuhy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_heon5")

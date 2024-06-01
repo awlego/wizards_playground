@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmt0a52ye4b6"]
+
+[ext_resource type="PackedScene" uid="uid://dhs52ypf3o7gt" path="res://src/spell_slot.tscn" id="1_3tsxt"]
+
+[node name="Backback" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -423.0
+offset_top = 331.0
+offset_right = -423.0
+offset_bottom = 331.0
+rotation = -0.801106
+
+[node name="NinePatchRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 804.0
+offset_bottom = 136.0
+color = Color(0, 0.698039, 0.913725, 0.239216)
+
+[node name="SpellSlots" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 805.0
+offset_bottom = 137.0
+
+[node name="SpellSlot" parent="SpellSlots" instance=ExtResource("1_3tsxt")]
+layout_mode = 2
+
+[node name="SpellSlot2" parent="SpellSlots" instance=ExtResource("1_3tsxt")]
+layout_mode = 2
+
+[node name="SpellSlot3" parent="SpellSlots" instance=ExtResource("1_3tsxt")]
+layout_mode = 2
+
+[node name="SpellSlot4" parent="SpellSlots" instance=ExtResource("1_3tsxt")]
+layout_mode = 2
+
+[node name="SpellSlot5" parent="SpellSlots" instance=ExtResource("1_3tsxt")]
+layout_mode = 2
+
+[node name="SpellSlot6" parent="SpellSlots" instance=ExtResource("1_3tsxt")]
+layout_mode = 2
+
+[node name="SpellSlot7" parent="SpellSlots" instance=ExtResource("1_3tsxt")]
+layout_mode = 2
