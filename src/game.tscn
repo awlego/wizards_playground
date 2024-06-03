@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdkmrbxpejdaa"]
 
 [ext_resource type="Script" path="res://src/Game.gd" id="1_xw550"]
-[ext_resource type="PackedScene" uid="uid://crqc85caec24x" path="res://src/wand_ui.tscn" id="3_hdnyy"]
-[ext_resource type="PackedScene" uid="uid://cmt0a52ye4b6" path="res://src/backback.tscn" id="4_jpm6s"]
+[ext_resource type="PackedScene" uid="uid://crqc85caec24x" path="res://src/spell_slot_container.tscn" id="3_hdnyy"]
+[ext_resource type="PackedScene" uid="uid://x6etafv76vnc" path="res://src/spell_card.tscn" id="4_cut84"]
 [ext_resource type="Script" path="res://src/HealthBar.gd" id="5_jub1s"]
 
 [sub_resource type="Gradient" id="Gradient_2aq2l"]
@@ -43,15 +43,11 @@ texture = SubResource("GradientTexture1D_wolg0")
 position = Vector2(128, -24)
 shape = SubResource("RectangleShape2D_aexxy")
 
-[node name="Wand_UI" parent="." instance=ExtResource("3_hdnyy")]
-offset_left = 2.0
-offset_top = 138.0
-offset_right = -794.0
-offset_bottom = -1324.0
+[node name="Backpack" parent="." instance=ExtResource("3_hdnyy")]
+offset_top = 100.0
+offset_right = -796.0
+offset_bottom = -1362.0
 
-[node name="Backback" parent="." instance=ExtResource("4_jpm6s")]
-offset_left = 814.0
-offset_top = 141.0
-offset_right = 814.0
-offset_bottom = 141.0
-rotation = 0.0
+[node name="SpellCard" parent="." instance=ExtResource("4_cut84")]
+z_index = 1
+position = Vector2(635, 624)

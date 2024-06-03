@@ -1,8 +1,8 @@
 extends Node2D
 
-@onready var bolt_scene = preload("res://src/Bolt.tscn")
-@onready var spell_slots = 
-
+@onready var spell_slots = $Node/SpellSlotContainer/SpellSlots
+@onready var cur_spell_index = 0
+@onready var recursion_depth = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -14,28 +14,30 @@ func _process(delta):
 	pass
 	
 	
+func get_next_spell():
+	var next_spell = spell_slots.get_child(cur_spell_index).equipped_spell_card
+	cur_spell_index += 1
+	
+	if cur_spell_index >= spell_slots.get_child_count():
+		cur_spell_index = 0
+		
+	if not is_instance_valid(next_spell):
+		recursion_depth += 1
+		if recursion_depth < 26:
+			next_spell = get_next_spell()
+	
+	recursion_depth = 0
+	return next_spell
+	
 func cast() -> void:
-	shoot_purple_bolt()
+	var spell = get_next_spell()
+	spell.cast()
 	
-func shoot_bolt(frames_path: String) -> void:
-	if frames_path == "":
-		print("Error: No frames path provided for bolt.")
-		return
 
-	var bolt = bolt_scene.instantiate()
-	var mouse_pos = get_global_mouse_position()
-	var direction = (mouse_pos - self.global_position).normalized()
+func print_equipped_spells():
+	for spell_slot in spell_slots.get_children():
+		var location = spell_slot.slot_position
+		var spell = spell_slot.equipped_spell_card
+		print("Slot ", location, ": ", spell)
+	print()
 	
-	bolt.direction = direction
-	bolt.rotation = direction.angle()
-	bolt.frames_path = frames_path # Set the frames of the bolt
-	bolt.position = self.global_position # Set the starting position to the wand's center
-
-	self.get_parent().get_parent().add_child(bolt)
-
-
-func shoot_purple_bolt() -> void:
-	shoot_bolt("res://assets/frames/purple_bolt_frames.tres")
-
-func shoot_blue_bolt() -> void:
-	shoot_bolt("res://assets/frames/blue_bolt_frames.tres")

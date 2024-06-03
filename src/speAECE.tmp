@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://crqc85caec24x"]
+[gd_scene load_steps=3 format=3 uid="uid://crqc85caec24x"]
 
 [ext_resource type="PackedScene" uid="uid://dhs52ypf3o7gt" path="res://src/spell_slot.tscn" id="1_ipun5"]
 [ext_resource type="Script" path="res://src/wand_ui.gd" id="1_yfbmt"]
-[ext_resource type="PackedScene" uid="uid://x6etafv76vnc" path="res://src/spell_card.tscn" id="3_s2pt5"]
 
-[node name="Wand_UI" type="Control"]
+[node name="SpellSlotContainer" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +37,3 @@ layout_mode = 2
 
 [node name="SpellSlot5" parent="SpellSlots" instance=ExtResource("1_ipun5")]
 layout_mode = 2
-
-[node name="SpellCard" parent="." instance=ExtResource("3_s2pt5")]
-position = Vector2(85, 71)

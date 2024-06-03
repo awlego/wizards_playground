@@ -33,7 +33,6 @@ func _ready():
 	scale = Vector2(0.125, 0.125)
 	#$sprite.scale = scale
 	#$CollisionShape2D.scale = scale
-	print(scale)
 	
 	collision_layer = 1 << 1  # Layer 2(Player)
 	collision_mask = 1 << 2 | 1 << 4 | 1 << 5 # Collides with Layer 5 (Friendly Fire Projectile),  # Collides with Layer 3 (Enemies), # Collides with Layer 4 (Walls)

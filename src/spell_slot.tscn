@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhs52ypf3o7gt"]
+[gd_scene load_steps=4 format=3 uid="uid://dhs52ypf3o7gt"]
 
 [ext_resource type="Script" path="res://src/spell_slot.gd" id="1_8dgse"]
+[ext_resource type="Texture2D" uid="uid://brd0fvv7ei0wq" path="res://assets/images/itemframe.png" id="2_6lwwn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55odu"]
 size = Vector2(80, 80)
@@ -12,9 +13,9 @@ offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 6
 size_flags_vertical = 4
+script = ExtResource("1_8dgse")
 
 [node name="SpellSlotShape" type="Area2D" parent="."]
-script = ExtResource("1_8dgse")
 
 [node name="HighlightColorRect" type="ColorRect" parent="SpellSlotShape"]
 anchors_preset = 8
@@ -47,3 +48,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpellSlotShape"]
 shape = SubResource("RectangleShape2D_55odu")
+
+[node name="Frame" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.499998, 0.5)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("2_6lwwn")
