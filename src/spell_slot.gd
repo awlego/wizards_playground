@@ -1,3 +1,4 @@
+#spell_slot.gd
 extends Control
 
 var is_current_snap_choice = false
@@ -19,7 +20,13 @@ func _process(_delta):
 	if Global.is_dragging:
 		visible = true
 	else:
-		visible = false
+		visible = true
+		
+func get_snap_location() -> Vector2:
+	# returns the center of the snap location in global space
+	print("get_snap_location(): ", spell_slot_shape.get_position())
+	print("get_snap_location()2: ", spell_slot_shape.get_global_position())
+	return spell_slot_shape.global_position
 		
 func set_current_snap_choice(is_chosen):
 	is_current_snap_choice = is_chosen
@@ -31,11 +38,11 @@ func set_current_snap_choice(is_chosen):
 	
 
 func _on_mouse_entered():
-	#print(global_position)
+	print("_on_mouse_entered: ", global_position)
 	Global.snap_location = global_position
 
 func _on_mouse_exited():
-	#print("resetting snap location")
+	print("resetting snap location _on_mouse_exited: ", global_position)
 	Global.snap_location = null
 
 signal custom_on_area_shape_entered

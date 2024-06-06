@@ -73,8 +73,6 @@ func _physics_process(delta: float) -> void:
 	#position = position + velocity
 	move_and_slide()
 
-
-
 func clip_velocity(vel: Vector2, max_speed: float) -> Vector2:
 	if vel.length() > max_speed:
 		vel = vel.normalized() * max_speed

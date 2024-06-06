@@ -10,13 +10,20 @@ var snap_spot = null
 func _ready():
 	create_player()
 #	create_enemy()
-	$SpellCard/CardSprite.color = Color(0, 0, 255)
 	pass
 
 func _process(_delta):
 	pass
 
+
+func _unhandled_input(event):
+	print("Unhandled input received: ", event)
+
+func _unhandled_gui_input(event):
+	print("Unhandled GUI input received: ", event)
+		
 func _input(event):
+
 	if event.is_action_pressed("_debug Spawn Enemy"):
 		create_enemy()
 		
@@ -33,7 +40,8 @@ func _input(event):
 				update_would_snap()
 		else:
 			Global.is_dragging = false
-			snap()
+			#if Global.hovered_spell_card:
+				#snap()
 
 	elif event is InputEventMouseMotion and Global.is_dragging:
 		Global.hovered_spell_card.global_position = event.global_position + drag_offset

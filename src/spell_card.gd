@@ -33,6 +33,7 @@ func _process(_delta):
 	pass
 
 func _on_area_2d_mouse_entered():
+	print("Mouse entered: SpellCard")
 	draggable = true
 	Global.hovered_spell_card = self
 	scale = Vector2(1.05, 1.05)

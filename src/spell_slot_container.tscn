@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://crqc85caec24x"]
 
 [ext_resource type="PackedScene" uid="uid://dhs52ypf3o7gt" path="res://src/spell_slot.tscn" id="1_ipun5"]
-[ext_resource type="Script" path="res://src/wand_ui.gd" id="1_yfbmt"]
+[ext_resource type="Script" path="res://src/spell_slot_container.gd" id="1_phedb"]
 
 [node name="SpellSlotContainer" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yfbmt")
+script = ExtResource("1_phedb")
 
 [node name="NinePatchRect" type="ColorRect" parent="."]
 layout_mode = 2
