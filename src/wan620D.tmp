@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bes7jx3kv0nsc"]
+
+[ext_resource type="Script" path="res://src/wand.gd" id="1_gyy0g"]
+[ext_resource type="PackedScene" uid="uid://crqc85caec24x" path="res://src/spell_slot_container.tscn" id="3_8ukq4"]
+[ext_resource type="Texture2D" uid="uid://bevjvwwx328w1" path="res://assets/images/wooden_staff.png" id="4_j1ljv"]
+
+[node name="Wand" type="Node2D"]
+script = ExtResource("1_gyy0g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_j1ljv")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="SpellSlotContainer" parent="Node" instance=ExtResource("3_8ukq4")]
+offset_top = 300.0
+offset_bottom = 300.0
