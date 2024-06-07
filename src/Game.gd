@@ -11,6 +11,7 @@ var snap_spot = null
 func _ready():
 	create_player()
 #	create_enemy()
+	create_backpack()
 	pass
 
 func _process(_delta):
@@ -39,5 +40,6 @@ func create_enemy():
 	self.add_child(new_enemy)
 	enemies.append(new_enemy)
 
-	
-
+func create_backpack():
+	for i in range(8):
+		$Backpack.create_spell_slot()

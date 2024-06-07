@@ -54,7 +54,7 @@ func add_to_slot(spell_slot_body_ref):
 		current_spell_slot_body_ref.get_parent().add_spell(spell_slot.equipped_spell_card)
 
 	spell_slot.add_spell(self)
-	tween.tween_property(self, "position", spell_slot_body_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", spell_slot_body_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
 	current_spell_slot_body_ref = spell_slot_body_ref
 	
 func _process(_delta):
@@ -79,15 +79,16 @@ func shoot_bolt(frames_path: String) -> void:
 	if frames_path == "":
 		print("Error: No frames path provided for bolt.")
 		return
-
+	
+	var wand_tip_location = self.get_parent().get_parent().get_parent().global_position
 	var bolt = bolt_scene.instantiate()
 	var mouse_pos = get_global_mouse_position()
-	var direction = (mouse_pos - self.global_position).normalized()
+	var direction = (mouse_pos - wand_tip_location).normalized()
 	
 	bolt.direction = direction
 	bolt.rotation = direction.angle()
 	bolt.frames_path = frames_path # Set the frames of the bolt
-	bolt.position = self.global_position # Set the starting position to the wand's center
+	bolt.position = wand_tip_location # Set the starting position to the wand's center
 
 	self.get_parent().get_parent().add_child(bolt)
 

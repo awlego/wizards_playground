@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://crqc85caec24x"]
+
+[ext_resource type="PackedScene" uid="uid://dhs52ypf3o7gt" path="res://src/spell_slot.tscn" id="1_ipun5"]
+[ext_resource type="Script" path="res://src/spell_slot_container.gd" id="1_phedb"]
+[ext_resource type="PackedScene" uid="uid://x6etafv76vnc" path="res://src/spell_card.tscn" id="3_gcoiu"]
+
+[node name="SpellSlotContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_phedb")
+
+[node name="NinePatchRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_right = 804.0
+offset_bottom = 136.0
+mouse_filter = 1
+color = Color(0, 0.698039, 0.913725, 0.239216)
+
+[node name="SpellSlots" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 805.0
+offset_bottom = 137.0
+
+[node name="SpellSlot" parent="SpellSlots" instance=ExtResource("1_ipun5")]
+layout_mode = 2
+
+[node name="SpellSlot2" parent="SpellSlots" instance=ExtResource("1_ipun5")]
+layout_mode = 2
+
+[node name="SpellSlot3" parent="SpellSlots" instance=ExtResource("1_ipun5")]
+layout_mode = 2
+
+[node name="SpellSlot4" parent="SpellSlots" instance=ExtResource("1_ipun5")]
+layout_mode = 2
+
+[node name="SpellSlot5" parent="SpellSlots" instance=ExtResource("1_ipun5")]
+layout_mode = 2
+
+[node name="SpellCard" parent="." instance=ExtResource("3_gcoiu")]
+position = Vector2(163, 217)
+
+[node name="SpellCard2" parent="." instance=ExtResource("3_gcoiu")]
+position = Vector2(381, 228)
+
+[node name="CardSprite" parent="SpellCard2" index="0"]
+color = Color(0.2, 0.419608, 0.364706, 1)
+
+[editable path="SpellCard2"]

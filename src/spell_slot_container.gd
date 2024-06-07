@@ -10,6 +10,7 @@ func _ready():
 	# so I can debug just this scene with some children
 	if get_parent() != get_tree().root:
 		remove_all_spell_children()
+		print(get_children())
 		$SpellCard.queue_free()
 		$SpellCard2.queue_free()
 
