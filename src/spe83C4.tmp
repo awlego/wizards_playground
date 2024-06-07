@@ -4,10 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bke14884f0e5e" path="res://assets/images/blue_bolt.png" id="2_53q7u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kys6y"]
-size = Vector2(80, 80)
 
 [node name="SpellCard" type="Node2D"]
-position = Vector2(137, 109)
 script = ExtResource("1_x18qa")
 
 [node name="CardSprite" type="ColorRect" parent="."]
@@ -22,9 +20,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 color = Color(0.65098, 0.184314, 0, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="ProjectileSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_53q7u")

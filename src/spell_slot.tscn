@@ -6,16 +6,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55odu"]
 size = Vector2(80, 80)
 
-[node name="SpellSlot" type="Control"]
+[node name="SpellSlot" type="Control" groups=["dropable"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 6
 size_flags_vertical = 4
+mouse_filter = 1
 script = ExtResource("1_8dgse")
 
-[node name="SpellSlotShape" type="Area2D" parent="."]
+[node name="SpellSlotShape" type="StaticBody2D" parent="." groups=["dropable"]]
 
 [node name="HighlightColorRect" type="ColorRect" parent="SpellSlotShape"]
 anchors_preset = 8

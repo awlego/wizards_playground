@@ -1,6 +1,11 @@
 extends Node2D
 
 var draggable = false
+var initial_position: Vector2
+var offset: Vector2
+var body_ref
+var is_inside_dropable
+
 @onready var sprite = $ProjectileSprite
 @onready var card_sprite = $CardSprite
 @onready var collision_shape = $Area2D/CollisionShape2D 
@@ -9,8 +14,13 @@ var draggable = false
 @onready var animation_path = "res://assets/frames/blue_bolt_frames.tres"
 
 func _ready():	
+	if get_parent() != get_tree().root:
+		global_position = Vector2(400, 400)
+		
 	$Area2D.mouse_entered.connect(_on_area_2d_mouse_entered)
 	$Area2D.mouse_exited.connect(_on_area_2d_mouse_exited)
+	$Area2D.body_entered.connect(_on_area_2d_body_entered)
+	$Area2D.body_exited.connect(_on_area_2d_body_exited)
 	
 	# Ensure the sprite has a texture
 	if sprite.texture:
@@ -27,22 +37,24 @@ func _ready():
 			print("Error: Collision shape is not a RectangleShape2D")
 	else:
 		print("Error: Sprite does not have a texture")
-
 	
 func _process(_delta):
+	if draggable:
+		if Input.is_action_just_pressed("click"):
+			initial_position = global_position
+			offset = get_global_mouse_position() - global_position
+			Global.is_dragging = true
+		if Input.is_action_pressed("click"):
+			global_position = get_global_mouse_position() - offset
+		elif Input.is_action_just_released("click"):
+			Global.is_dragging = false
+			var tween = get_tree().create_tween()
+			if is_inside_dropable:
+				tween.tween_property(self, "position", body_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
+			else:
+				tween.tween_property(self, "global_position", initial_position, 0.05).set_ease(Tween.EASE_OUT)
 	pass
-
-func _on_area_2d_mouse_entered():
-	print("Mouse entered: SpellCard")
-	draggable = true
-	Global.hovered_spell_card = self
-	scale = Vector2(1.05, 1.05)
-
-func _on_area_2d_mouse_exited():
-	draggable = false
-#	Global.hovered_spell_card = null
-	scale = Vector2(1.00, 1.00)
-
+	
 func shoot_bolt(frames_path: String) -> void:
 	if frames_path == "":
 		print("Error: No frames path provided for bolt.")
@@ -59,6 +71,28 @@ func shoot_bolt(frames_path: String) -> void:
 
 	self.get_parent().get_parent().add_child(bolt)
 
+func _on_area_2d_mouse_entered():
+	#print("Mouse entered: SpellCard")
+	draggable = true
+	scale = Vector2(1.05, 1.05)
+
+func _on_area_2d_mouse_exited():
+	#print("Mouse exited: SpellCard")
+	draggable = false
+	scale = Vector2(1.00, 1.00)
+
+func _on_area_2d_body_entered(body: StaticBody2D):
+	print("SpellCard entered dropable area: ", body.is_in_group('dropable'))
+	if body.is_in_group('dropable'):
+		is_inside_dropable = true
+		body.modulate = Color(Color.REBECCA_PURPLE, 1)
+		body_ref = body
+		
+func _on_area_2d_body_exited(body: StaticBody2D):
+	print("SpellCard exited dropable area")
+	if body.is_in_group('dropable'):
+		is_inside_dropable = false
+		body.modulate = Color(Color.MEDIUM_PURPLE, .7)
 
 func shoot_purple_bolt() -> void:
 	shoot_bolt("res://assets/frames/purple_bolt_frames.tres")
