@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdkmrbxpejdaa"]
+
+[ext_resource type="Script" path="res://src/Game.gd" id="1_xw550"]
+[ext_resource type="PackedScene" uid="uid://crqc85caec24x" path="res://src/spell_slot_container.tscn" id="3_hdnyy"]
+[ext_resource type="Script" path="res://src/HealthBar.gd" id="5_jub1s"]
+
+[sub_resource type="Gradient" id="Gradient_2aq2l"]
+offsets = PackedFloat32Array(0, 0.522088, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.60241, 0.60241, 0.60241, 1, 0.286275, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wolg0"]
+gradient = SubResource("Gradient_2aq2l")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aexxy"]
+size = Vector2(256, 40)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_xw550")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 1006.0
+offset_bottom = 107.0
+script = ExtResource("5_jub1s")
+metadata/_edit_use_anchors_ = true
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+position = Vector2(731, 1467)
+collision_layer = 33
+collision_mask = 255
+
+[node name="TextureRect" type="TextureRect" parent="Floor2"]
+offset_top = -44.0
+offset_right = 256.0
+offset_bottom = -4.0
+texture = SubResource("GradientTexture1D_wolg0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(128, -24)
+shape = SubResource("RectangleShape2D_aexxy")
+
+[node name="Backpack" parent="." instance=ExtResource("3_hdnyy")]
+offset_top = 100.0
+offset_right = -796.0
+offset_bottom = -1362.0

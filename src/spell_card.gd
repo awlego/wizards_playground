@@ -3,8 +3,10 @@ extends Node2D
 var draggable = false
 var initial_position: Vector2
 var offset: Vector2
-var body_ref
+var pending_spell_slot_body_ref
+var current_spell_slot_body_ref
 var is_inside_dropable
+var is_hovered
 
 @onready var sprite = $ProjectileSprite
 @onready var card_sprite = $CardSprite
@@ -14,8 +16,8 @@ var is_inside_dropable
 @onready var animation_path = "res://assets/frames/blue_bolt_frames.tres"
 
 func _ready():	
-	if get_parent() != get_tree().root:
-		global_position = Vector2(400, 400)
+	#if get_parent() != get_tree().root:
+		#global_position = Vector2(400, 400)
 		
 	$Area2D.mouse_entered.connect(_on_area_2d_mouse_entered)
 	$Area2D.mouse_exited.connect(_on_area_2d_mouse_exited)
@@ -38,8 +40,25 @@ func _ready():
 	else:
 		print("Error: Sprite does not have a texture")
 	
+func add_to_slot(spell_slot_body_ref):
+	var spell_slot = spell_slot_body_ref.get_parent()
+	var tween = get_tree().create_tween()
+	
+	print()
+	print(self, " ", spell_slot.equipped_spell_card)
+	print()
+	
+	if spell_slot.equipped_spell_card and spell_slot.equipped_spell_card != self:
+		print("Swapping!")
+		tween.tween_property(spell_slot.equipped_spell_card, "global_position", initial_position, 0.05).set_ease(Tween.EASE_OUT)
+		current_spell_slot_body_ref.get_parent().add_spell(spell_slot.equipped_spell_card)
+
+	spell_slot.add_spell(self)
+	tween.tween_property(self, "position", spell_slot_body_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
+	current_spell_slot_body_ref = spell_slot_body_ref
+	
 func _process(_delta):
-	if draggable:
+	if draggable and is_hovered:
 		if Input.is_action_just_pressed("click"):
 			initial_position = global_position
 			offset = get_global_mouse_position() - global_position
@@ -50,10 +69,11 @@ func _process(_delta):
 			Global.is_dragging = false
 			var tween = get_tree().create_tween()
 			if is_inside_dropable:
-				tween.tween_property(self, "position", body_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
+				add_to_slot(pending_spell_slot_body_ref)
 			else:
 				tween.tween_property(self, "global_position", initial_position, 0.05).set_ease(Tween.EASE_OUT)
-	pass
+	if Input.is_action_just_released("click"):
+		Global.is_dragging = false
 	
 func shoot_bolt(frames_path: String) -> void:
 	if frames_path == "":
@@ -72,13 +92,19 @@ func shoot_bolt(frames_path: String) -> void:
 	self.get_parent().get_parent().add_child(bolt)
 
 func _on_area_2d_mouse_entered():
-	#print("Mouse entered: SpellCard")
-	draggable = true
-	scale = Vector2(1.05, 1.05)
+	if not Global.is_dragging and (Global.hovered_spell_card == null or Global.hovered_spell_card == self):
+		print("Mouse entered: SpellCard")
+		Global.hovered_spell_card = self
+		draggable = true
+		is_hovered = true
+		scale = Vector2(1.05, 1.05)
 
 func _on_area_2d_mouse_exited():
-	#print("Mouse exited: SpellCard")
+	print("Mouse exited: SpellCard")
+	#if Global.hovered_spell_card == self:
+	Global.hovered_spell_card = null
 	draggable = false
+	is_hovered = false
 	scale = Vector2(1.00, 1.00)
 
 func _on_area_2d_body_entered(body: StaticBody2D):
@@ -86,14 +112,17 @@ func _on_area_2d_body_entered(body: StaticBody2D):
 	if body.is_in_group('dropable'):
 		is_inside_dropable = true
 		body.modulate = Color(Color.REBECCA_PURPLE, 1)
-		body_ref = body
+		pending_spell_slot_body_ref = body
+
 		
 func _on_area_2d_body_exited(body: StaticBody2D):
 	print("SpellCard exited dropable area")
 	if body.is_in_group('dropable'):
 		is_inside_dropable = false
 		body.modulate = Color(Color.MEDIUM_PURPLE, .7)
-
+		var spell_slot = pending_spell_slot_body_ref.get_parent()
+		spell_slot.remove_spell()
+		
 func shoot_purple_bolt() -> void:
 	shoot_bolt("res://assets/frames/purple_bolt_frames.tres")
 

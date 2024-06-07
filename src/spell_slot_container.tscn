@@ -18,6 +18,7 @@ script = ExtResource("1_phedb")
 layout_mode = 2
 offset_right = 804.0
 offset_bottom = 136.0
+mouse_filter = 1
 color = Color(0, 0.698039, 0.913725, 0.239216)
 
 [node name="SpellSlots" type="HBoxContainer" parent="."]
@@ -41,4 +42,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="SpellCard" parent="." instance=ExtResource("3_gcoiu")]
-position = Vector2(127, 187)
+position = Vector2(163, 217)
+
+[node name="SpellCard2" parent="." instance=ExtResource("3_gcoiu")]
+position = Vector2(381, 228)
+
+[node name="CardSprite" parent="SpellCard2" index="0"]
+color = Color(0.2, 0.419608, 0.364706, 1)
+
+[editable path="SpellCard2"]
