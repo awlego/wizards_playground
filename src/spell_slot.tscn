@@ -50,6 +50,16 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpellSlotShape"]
 shape = SubResource("RectangleShape2D_55odu")
 
+[node name="DebugText" type="Label" parent="SpellSlotShape"]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 60
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Frame" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-0.499998, 0.5)

@@ -28,7 +28,7 @@ script = ExtResource("5_jub1s")
 metadata/_edit_use_anchors_ = true
 
 [node name="Floor2" type="StaticBody2D" parent="."]
-position = Vector2(731, 1467)
+position = Vector2(766, 1139)
 collision_layer = 33
 collision_mask = 255
 
@@ -43,6 +43,7 @@ position = Vector2(128, -24)
 shape = SubResource("RectangleShape2D_aexxy")
 
 [node name="Backpack" parent="." instance=ExtResource("3_hdnyy")]
-offset_top = 100.0
-offset_right = -796.0
-offset_bottom = -1362.0
+offset_left = 9.0
+offset_top = 114.0
+offset_right = -387.0
+offset_bottom = -948.0

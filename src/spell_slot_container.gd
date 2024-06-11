@@ -22,11 +22,14 @@ func remove_all_spell_children():
 		child.queue_free()
 
 func create_spell_slot():
-	var spell_slot = SpellSlotScript.instantiate()
+	var spell_slot = SpellSlotScript.instantiate(spell_slot_count)
 	$SpellSlots.add_child(spell_slot)
 
 	spell_slot.slot_position = spell_slot_count
+	spell_slot.get_child(0).get_child(3).text = str(spell_slot_count) # $spell_slot/SpellSlotShape/DebugText
+	
 	spell_slot_count += 1
+
 	
 func get_spell_slot_location(slot) -> Vector2:
 	assert(slot < spell_slot_count)

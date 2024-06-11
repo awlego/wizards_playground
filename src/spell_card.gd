@@ -8,6 +8,8 @@ var current_spell_slot_body_ref
 var is_inside_dropable
 var is_hovered
 
+signal spell_casted
+
 @onready var sprite = $ProjectileSprite
 @onready var card_sprite = $CardSprite
 @onready var collision_shape = $Area2D/CollisionShape2D 
@@ -94,14 +96,14 @@ func shoot_bolt(frames_path: String) -> void:
 
 func _on_area_2d_mouse_entered():
 	if not Global.is_dragging and (Global.hovered_spell_card == null or Global.hovered_spell_card == self):
-		print("Mouse entered: SpellCard")
+		#print("Mouse entered: SpellCard")
 		Global.hovered_spell_card = self
 		draggable = true
 		is_hovered = true
 		scale = Vector2(1.05, 1.05)
 
 func _on_area_2d_mouse_exited():
-	print("Mouse exited: SpellCard")
+	#print("Mouse exited: SpellCard")
 	#if Global.hovered_spell_card == self:
 	Global.hovered_spell_card = null
 	draggable = false
@@ -118,11 +120,12 @@ func _on_area_2d_body_entered(body: StaticBody2D):
 		
 func _on_area_2d_body_exited(body: StaticBody2D):
 	print("SpellCard exited dropable area")
-	if body.is_in_group('dropable'):
+	if body == pending_spell_slot_body_ref:
 		is_inside_dropable = false
-		body.modulate = Color(Color.MEDIUM_PURPLE, .7)
 		var spell_slot = pending_spell_slot_body_ref.get_parent()
 		spell_slot.remove_spell()
+	if body.is_in_group('dropable'):
+		body.modulate = Color(Color.MEDIUM_PURPLE, .7)
 		
 func shoot_purple_bolt() -> void:
 	shoot_bolt("res://assets/frames/purple_bolt_frames.tres")
@@ -130,6 +133,7 @@ func shoot_purple_bolt() -> void:
 func shoot_blue_bolt() -> void:
 	shoot_bolt("res://assets/frames/blue_bolt_frames.tres")
 
-
 func cast():
+	Global.emit_spell_casted(current_spell_slot_body_ref)
 	shoot_bolt(animation_path)
+
