@@ -16,7 +16,7 @@ var gravity = 8000
 
 @onready var momentum = 0
 #@onready var velocity: Vector2 = Vector2.ZERO
-@export var max_speed: float = 2000.0
+@export var max_speed: float = 500.0
 @export var damping: float = 20.0  # Damping factor to slow down velocity towards 0
 
 

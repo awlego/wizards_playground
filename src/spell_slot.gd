@@ -1,4 +1,5 @@
 #spell_slot.gd
+#Godot4
 extends Control
 
 var is_current_snap_choice = false
@@ -23,10 +24,19 @@ func _process(_delta):
 		spell_slot_shape.visible = true
 
 func add_spell(spell):
+	#if equipped_spell_card:
+		#print("calling remove during add_spell")
+		#remove_spell()
 	equipped_spell_card = spell
+	print("Added spell %s to slot %s" % [spell, slot_position])
 
 func remove_spell():
-	equipped_spell_card = null
+	if equipped_spell_card:
+		print("Removed spell %s from slot %s" % [equipped_spell_card, slot_position])
+		equipped_spell_card.current_spell_slot_body_ref = null
+		equipped_spell_card = null
+	else:
+		print("Attempted to remove spell from empty slot %s" % slot_position)
 
 func is_occupied():
 	if equipped_spell_card:
@@ -34,7 +44,11 @@ func is_occupied():
 	return false
 
 
-func _on_spell_casted(spell_slot_body_ref):
-	print("Spell casted from slot: ", spell_slot_body_ref.get_parent().slot_position)
+func _on_spell_casted(spell_slot_ref):
 	# Handle the spell cast event here
+	if spell_slot_ref == self:
+		print("Spell casted from slot: ", spell_slot_ref.slot_position)
+		$SpellSlotShape/HighlightColorRect.visible = true
+	else:
+		$SpellSlotShape/HighlightColorRect.visible = false
 	pass # Replace with function body.

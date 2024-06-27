@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://x6etafv76vnc"]
+
+[ext_resource type="Script" path="res://src/spell_card.gd" id="1_x18qa"]
+[ext_resource type="Texture2D" uid="uid://bke14884f0e5e" path="res://assets/images/blue_bolt.png" id="2_53q7u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kys6y"]
+size = Vector2(80, 80)
+
+[node name="SpellCard" type="Node2D"]
+position = Vector2(137, 109)
+script = ExtResource("1_x18qa")
+
+[node name="CardSprite" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.65098, 0.184314, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ProjectileSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_53q7u")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_kys6y")

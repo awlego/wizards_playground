@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhs52ypf3o7gt"]
+
+[ext_resource type="Script" path="res://src/spell_slot.gd" id="1_8dgse"]
+[ext_resource type="Texture2D" uid="uid://brd0fvv7ei0wq" path="res://assets/images/itemframe.png" id="2_6lwwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55odu"]
+size = Vector2(80, 80)
+
+[node name="SpellSlot" type="Control" groups=["dropable"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 1
+script = ExtResource("1_8dgse")
+
+[node name="SpellSlotShape" type="StaticBody2D" parent="." groups=["dropable"]]
+
+[node name="HighlightColorRect" type="ColorRect" parent="SpellSlotShape"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.796078, 0.847059, 0.101961, 0.819608)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SpellSlotShape"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpellSlotShape"]
+shape = SubResource("RectangleShape2D_55odu")
+
+[node name="DebugText" type="Label" parent="SpellSlotShape"]
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 60
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Frame" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.499998, 0.5)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("2_6lwwn")
